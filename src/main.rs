@@ -1,5 +1,6 @@
 use std::collections::HashSet;
 use counter::Counter;
+use regex::Regex;
 
 fn main() {}
 
@@ -23,6 +24,11 @@ fn is_anagram(a: &str, b: &str) -> bool {
     let count_b = b.chars().collect::<Counter<_>>();
     count_a == count_b
 
+}
+
+fn urlify(a: &str) -> String {
+    let re = Regex::new(" ").unwrap();
+    re.replace_all(a.trim(),"%20").into_owned()
 }
 
 #[cfg(test)]
@@ -50,6 +56,10 @@ mod tests {
         assert!(!is_anagram("ab","cb"));
     }
 
+    #[test]
+    fn urlify_john_smith() {
+        assert_eq!(urlify("Mr John Smith "),"Mr%20John%20Smith")
+    }
 
 }
 
