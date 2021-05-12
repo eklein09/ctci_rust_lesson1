@@ -1,6 +1,9 @@
-use std::collections::HashSet;
 use counter::Counter;
-use regex::Regex;
+
+
+use std::collections::HashSet;
+
+mod urlify;
 
 fn main() {}
 
@@ -23,13 +26,9 @@ fn is_anagram(a: &str, b: &str) -> bool {
     let count_a = a.chars().collect::<Counter<_>>();
     let count_b = b.chars().collect::<Counter<_>>();
     count_a == count_b
-
 }
 
-fn urlify(a: &str) -> String {
-    let re = Regex::new(" ").unwrap();
-    re.replace_all(a.trim(),"%20").into_owned()
-}
+
 
 #[cfg(test)]
 mod tests {
@@ -48,19 +47,16 @@ mod tests {
 
     #[test]
     fn anagram_true() {
-        assert!(is_anagram("abc","cba"));
+        assert!(is_anagram("abc", "cba"));
     }
 
     #[test]
     fn anagram_false() {
-        assert!(!is_anagram("ab","cb"));
+        assert!(!is_anagram("ab", "cb"));
     }
 
     #[test]
     fn urlify_john_smith() {
-        assert_eq!(urlify("Mr John Smith "),"Mr%20John%20Smith")
+        assert_eq!(urlify::urlify("Mr John Smith "), "Mr%20John%20Smith")
     }
-
 }
-
-
