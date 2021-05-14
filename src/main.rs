@@ -4,6 +4,7 @@ use counter::Counter;
 use std::collections::HashSet;
 
 mod urlify;
+mod compression;
 
 fn main() {}
 
@@ -55,8 +56,5 @@ mod tests {
         assert!(!is_anagram("ab", "cb"));
     }
 
-    #[test]
-    fn urlify_john_smith() {
-        assert_eq!(urlify::urlify("Mr John Smith "), "Mr%20John%20Smith")
-    }
+
 }
