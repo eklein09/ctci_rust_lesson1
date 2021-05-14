@@ -1,10 +1,9 @@
 use counter::Counter;
 
-
 use std::collections::HashSet;
 
-mod urlify;
 mod compression;
+mod urlify;
 
 fn main() {}
 
@@ -20,7 +19,7 @@ fn is_unique(s: &str) -> bool {
         }
     }
 
-    return unique;
+    unique
 }
 
 fn is_anagram(a: &str, b: &str) -> bool {
@@ -28,8 +27,6 @@ fn is_anagram(a: &str, b: &str) -> bool {
     let count_b = b.chars().collect::<Counter<_>>();
     count_a == count_b
 }
-
-
 
 #[cfg(test)]
 mod tests {
@@ -55,6 +52,4 @@ mod tests {
     fn anagram_false() {
         assert!(!is_anagram("ab", "cb"));
     }
-
-
 }

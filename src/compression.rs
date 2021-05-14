@@ -1,31 +1,39 @@
-fn string_compression(s: &str) -> String {
-    let mut compressed = String::new();
-    let mut current_char: char = s.chars().nth(0).unwrap();
-    let mut chars_encountered: u32 = 1;
-    for (i,c) in s.chars().enumerate() {
-        if i == 0 {
-            continue;
-        } else {
-            if c == current_char {
-                chars_encountered += 1;
-            } else {
-                compressed.push(current_char);
-                    compressed.push(std::char::from_digit(chars_encountered,10).unwrap());
-                current_char = c;
-                chars_encountered = 1;
-            }
-        }
-    }
+extern crate itertools;
 
-    compressed.push(current_char);
-    compressed.push(std::char::from_digit(chars_encountered,10).unwrap());
-    compressed
+use itertools::Itertools;
+
+fn string_compression(s: &str) -> String {
+    let mut output = String::new();
+
+    for (key, group) in &s.chars().group_by(|y| *y) {
+        output.push(key);
+        output.push(std::char::from_digit(group.count() as u32, 10).unwrap());
+    }
+    if output.len() > s.len() {
+        String::from(s)
+    } else {
+        output
+    }
 }
 
 #[cfg(test)]
 #[test]
 fn test_compression() {
     let result = string_compression("aabcccccaaa");
-    println!("{}",result);
-    assert_eq!(result,"a2b1c5a3");
+    println!("{}", result);
+    assert_eq!(result, "a2b1c5a3");
+}
+
+#[test]
+fn test_compression2() {
+    let result = string_compression("aaa");
+    println!("{}", result);
+    assert_eq!(result, "a3");
+}
+
+#[test]
+fn test_compression3() {
+    let result = string_compression("a");
+    println!("{}", result);
+    assert_eq!(result, "a");
 }
