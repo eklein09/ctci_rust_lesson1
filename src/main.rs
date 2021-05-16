@@ -4,8 +4,10 @@ use std::collections::HashSet;
 
 mod compression;
 mod urlify;
+mod rotation;
 
-fn main() {}
+fn main() {
+}
 
 fn is_unique(s: &str) -> bool {
     let mut encountered: HashSet<char> = HashSet::new();

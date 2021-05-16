@@ -6,7 +6,10 @@ pub fn urlify(a: &str) -> String {
 }
 
 #[cfg(test)]
-#[test]
-fn urlify_john_smith() {
-    assert_eq!(urlify("Mr John Smith "), "Mr%20John%20Smith")
+mod tests {
+    #[test]
+    fn urlify_john_smith() {
+        assert_eq!(super::urlify("Mr John Smith "), "Mr%20John%20Smith")
+    }
 }
+

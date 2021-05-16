@@ -17,23 +17,25 @@ fn string_compression(s: &str) -> String {
 }
 
 #[cfg(test)]
-#[test]
-fn test_compression() {
-    let result = string_compression("aabcccccaaa");
-    println!("{}", result);
-    assert_eq!(result, "a2b1c5a3");
-}
-
-#[test]
-fn test_compression2() {
-    let result = string_compression("aaa");
-    println!("{}", result);
-    assert_eq!(result, "a3");
-}
-
-#[test]
-fn test_compression3() {
-    let result = string_compression("a");
-    println!("{}", result);
-    assert_eq!(result, "a");
+mod tests {
+    #[test]
+    fn test_compression() {
+        let result = super::string_compression("aabcccccaaa");
+        println!("{}", result);
+        assert_eq!(result, "a2b1c5a3");
+    }
+    
+    #[test]
+    fn test_compression2() {
+        let result = super::string_compression("aaa");
+        println!("{}", result);
+        assert_eq!(result, "a3");
+    }
+    
+    #[test]
+    fn test_compression3() {
+        let result = super::string_compression("a");
+        println!("{}", result);
+        assert_eq!(result, "a");
+    }
 }
