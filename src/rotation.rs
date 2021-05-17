@@ -1,4 +1,6 @@
-fn rotate(matrix: &mut [[i32;2];2]) -> bool {
+use std::fmt::Display;
+
+fn rotate<T>(matrix: &mut [&mut [T]]) -> bool {
     if matrix.len() == 0 || matrix.len() != matrix[0].len() {
         return false;
     }; // Not a square
@@ -27,7 +29,7 @@ fn rotate(matrix: &mut [[i32;2];2]) -> bool {
     true
 }
 
-fn print_matrix(m: & [[i32;2];2]) {
+fn print_matrix<T: Display>(m: & std::vec::Vec<std::vec::Vec<T>>) {
     println!("Rotated result: {},{},{},{}",m[0][0],m[0][1],m[1][0],m[1][1]);
 }
 
@@ -35,9 +37,13 @@ fn print_matrix(m: & [[i32;2];2]) {
 mod tests {
     #[test]
     fn test_rotate_matrix() {
-        let mut matrix = [[1,2],[3,4]];
-        super::print_matrix(&matrix);
-        super::rotate(&mut matrix);
-        super::print_matrix(&matrix);
+        let mut matrix = vec![vec![1,2],vec![3,4]];
+        // super::print_matrix(&matrix);
+        super::rotate(&mut matrix[..]);
+        // super::print_matrix(&matrix);
+        assert_eq!(matrix[0][0],3);
+        assert_eq!(matrix[0][1],1);
+        assert_eq!(matrix[1][0],2);
+        assert_eq!(matrix[1][1],4);
     }
 }
