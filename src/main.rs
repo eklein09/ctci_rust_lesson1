@@ -5,6 +5,7 @@ use std::collections::HashSet;
 mod compression;
 mod urlify;
 mod rotation;
+mod common_prefix;
 
 fn main() {
 }
